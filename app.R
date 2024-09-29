@@ -25,14 +25,27 @@ ui <- fluidPage(
       p("Format requirments: .csv file, one line per learning objective"),
       p("Column 1: Short code"),
       p("Column 2: Full description"),
-      p("Column 3: Additional Information"),
+      p("Column 3+: Additional Information"),
       
-      fileInput("upload", NULL, buttonLabel = "Upload...", multiple = TRUE),
-      tableOutput("files")
+      # fileInput("upload", NULL, buttonLabel = "Upload...", multiple = TRUE),
+      # tableOutput("files")
 
+      fileInput("objectives", NULL, buttonLabel = "Upload...", multiple = TRUE),
+      
+      tableOutput("objectivesContents"),
+      
       # classes upload
+      p("Please upload a list of classes ."),
+      p("Format requirments: .csv file, one line per class"),
+      p("Column 1: Class code"),
+      p("Column 2: Class name"),
+      p("Column 3+: Additional Information"),
       
       
+      fileInput("classes", NULL, buttonLabel = "Upload...", multiple = TRUE),
+      tableOutput("classesContents")
+      
+        
       
       # mapping tool with tickboxes
       
@@ -52,9 +65,31 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
 
-  
-  output$files <- renderTable(input$upload)
 
+
+  
+    
+
+  output$objectivesContents <- renderTable({
+    req(input$objectives)
+    objectivesTable <- read.csv(input$objectives$datapath)
+    head(objectivesTable)
+  })
+
+  
+  
+
+
+  
+  output$classesContents <- renderTable({
+    req(input$classes)
+    classesTable <- read.csv(input$classes$datapath)
+    head(classesTable)[,1:2]
+  })
+  
+  
+
+  
   
   
 }
