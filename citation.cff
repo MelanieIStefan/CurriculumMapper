@@ -5,7 +5,5 @@ authors:
   given-names: "Melanie I"
   orcid: "0000-0002-6086-7357"
 title: "Curriculum Mapper"
-# version: 0.0.1
-# doi: 10.5281/zenodo.1234
-# date-released: 2017-12-18
-# url: "https://github.com/github-linguist/linguist"
+date-released: 2024-09-30
+url: "https://github.com/MelanieIStefan/CurriculumMapper"
