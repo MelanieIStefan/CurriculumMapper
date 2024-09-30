@@ -60,15 +60,19 @@ for (j in 1:nrow(learningObjectives)){
 # Save to make sure
 write.csv(curriculumMap,"CurriculumMap.csv")
 
-curriculumMapPlot <- read.csv("CurriculumMap.csv")
+curriculumMapPlot <- read.csv("CurriculumMap.csv", header=TRUE)
 
+# some hard coding to prettify things
+curriculumMapPlot$LV=factor(curriculumMapPlot$LV, levels=c("VL 14.1","VL 14.2", "VL 14.3", "VL 14.4", "SE 14.5", "SE 14.6", "SE 14.7", "VL 14.8", "VL 14.9", "VL14.10", "SE 14.11", "SE 14.12", "SE 14.13", "SE 14.14" ))
+curriculumMapPlot$behandelt=factor(curriculumMapPlot$behandelt, levels=c("e", "v", "p","n"))
 
 # plot works, just make it prettier!
 
 ggplot(curriculumMapPlot, mapping=aes(LV,Lernziel,fill=behandelt, label=behandelt)) +
           geom_tile() +
           geom_text(col = "black") +
-          theme_minimal()
-
-        
-
+          theme_minimal()+
+          scale_fill_manual(values=c("#21918c","#440154", "#fde725","#EEEEEE")) +
+          theme(axis.text.x=element_text(angle = -90, hjust = 0))
+          labs(title = "Curriculumskarte", e = "eingeführt", n = "nicht behandelt", p = "geprüft", v="verstärkt") 
+  
