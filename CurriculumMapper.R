@@ -42,13 +42,13 @@ for (i in 1:3) {
 for (j in 1:2){
     print(learningObjectives[j,2])
     x <- readline("eingeführt (e), verstärkt (v), geprüft (p) oder nicht behandelt (n)? ")
-    b=0
+    b="ne"
     if (x=="e"){
-      b=1
+      b="e"
     } else if (x=="v"){
-      b=2
+      b="b"
     }  else if (x=="p"){
-      b=3
+      b="p"
     }
     mapRow <- c(classes[i,1],classes[i,2],learningObjectives[j,2],learningObjectives[j,2],b)
     curriculumMap[nrow(curriculumMap)+1,] <- mapRow
