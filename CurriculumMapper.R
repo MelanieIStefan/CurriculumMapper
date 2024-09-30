@@ -8,7 +8,6 @@
 
 
 learningObjectives <- read.csv("~/Dokumente/Wissenschaftliches_Arbeiten/Lernziele.csv",header=FALSE)
-head(learningObjectives)
 
 # Upload file with Classes:
 # Requirements: 
@@ -19,6 +18,6 @@ head(learningObjectives)
 # Column 3+: Additional Information
 
 classes <- read.csv("~/Dokumente/Wissenschaftliches_Arbeiten/Liste_Lehrveranstaltungen.csv",header=FALSE)
-head(classes)
+nrow(classes)
 
 
