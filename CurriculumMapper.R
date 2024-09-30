@@ -1,4 +1,5 @@
-
+# load librarise
+library(ggplot2)
 
 # Upload file with Learning Objectives:
 # Change file path to your own
@@ -28,37 +29,46 @@ classes <- read.csv("~/Dokumente/Wissenschaftliches_Arbeiten/Liste_Lehrveranstal
 classes <- classes[classes[,1]!="",1:2]
 
 curriculumMap <- data.frame(matrix(nrow=0,ncol=5))
-names(curriculumMap) <- c("LV", "LV N", "Lernziel", "Lernziel Lang", "behandelt")
+names(curriculumMap) <- c("LV", "LV Name", "Lernziel", "Lernziel Lang", "behandelt")
 
 
-# for (i in 1:nrow(classes)) {
+for (i in 1:nrow(classes)) {
 # for testing
-for (i in 1:3) {
+# for (i in 1:3) {
+  print("*********************")
   print(paste(classes[i,1]," - ", classes[i,2], sep=""))
-  print("Wurden folgende Lernziele in dieser LV ...")
+  print("*********************")
 
-# for (j in 1:nrow(learningObjectives)){
+for (j in 1:nrow(learningObjectives)){
 # for testing
-for (j in 1:2){
+# for (j in 1:2){
     print(learningObjectives[j,2])
-    x <- readline("eingeführt (e), verstärkt (v), geprüft (p) oder nicht behandelt (n)? ")
-    b="ne"
+    x <- readline("Wurde diese Ziel eingeführt (e), verstärkt (v), geprüft (p) oder nicht behandelt (n)? ")
+    b="0"
     if (x=="e"){
       b="e"
     } else if (x=="v"){
-      b="b"
+      b="v"
     }  else if (x=="p"){
       b="p"
     }
-    mapRow <- c(classes[i,1],classes[i,2],learningObjectives[j,2],learningObjectives[j,2],b)
+    mapRow <- c(classes[i,1],classes[i,2],learningObjectives[j,1],learningObjectives[j,2],b)
     curriculumMap[nrow(curriculumMap)+1,] <- mapRow
   }
 }
 
+# Save to make sure
+write.csv(curriculumMap,"CurriculumMap.csv")
 
-# for testing purposes only, to deploy, replace curriculumMapTest by curriculumMap
+curriculumMapPlot <- read.csv("CurriculumMap.csv")
 
 
+# plot works, just make it prettier!
 
+ggplot(curriculumMapPlot, mapping=aes(LV,Lernziel,fill=behandelt, label=behandelt)) +
+          geom_tile() +
+          geom_text(col = "black") +
+          theme_minimal()
 
+        
 
