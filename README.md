@@ -1,2 +1,2 @@
 # CurriculumMapper
-A curriculum mapping tool using R Shiny
+A curriculum mapping tool using R
