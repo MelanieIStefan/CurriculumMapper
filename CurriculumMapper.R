@@ -1,3 +1,5 @@
+
+
 # Upload file with Learning Objectives:
 # Change file path to your own
 # Requirements: 
@@ -10,7 +12,6 @@
 
 learningObjectives <- read.csv("~/Dokumente/Wissenschaftliches_Arbeiten/Lernziele.csv",header=FALSE,)
 learningObjectives <- learningObjectives[learningObjectives[,1]!="",1:2]
-nrow(learningObjectives)
 
 
 # Upload file with Classes:
@@ -25,34 +26,39 @@ nrow(learningObjectives)
 # import classes file, ignore empty rows and colums past 2
 classes <- read.csv("~/Dokumente/Wissenschaftliches_Arbeiten/Liste_Lehrveranstaltungen.csv",header=FALSE)
 classes <- classes[classes[,1]!="",1:2]
-nrow(classes)
-c
 
+curriculumMap <- data.frame(matrix(nrow=0,ncol=5))
+names(curriculumMap) <- c("LV", "LV N", "Lernziel", "Lernziel Lang", "behandelt")
 
 
 # for (i in 1:nrow(classes)) {
+# for testing
 for (i in 1:3) {
   print(paste(classes[i,1]," - ", classes[i,2], sep=""))
   print("Wurden folgende Lernziele in dieser LV ...")
-  
-#  for (j in 1:nrow(learningObjectives)){
-  for (j in 1:2){
+
+# for (j in 1:nrow(learningObjectives)){
+# for testing
+for (j in 1:2){
     print(learningObjectives[j,2])
-    x <- readline("eingeführt (e), verstärkt (v), geprüft (p) oder nicht behandelt (n)? ")  
-    e=0
-    r=0
-    a=0
+    x <- readline("eingeführt (e), verstärkt (v), geprüft (p) oder nicht behandelt (n)? ")
+    b=0
     if (x=="e"){
-    e=1  
-    } else if (x=="r"){
-      r=1
-    }  else if (x=="a"){
-      a=1
+      b=1
+    } else if (x=="v"){
+      b=2
+    }  else if (x=="p"){
+      b=3
     }
-    mapRow <- c(classes[i,1],classes[i,2],learningObjectives[j,2],learningObjectives[j,2],e,r,a)
+    mapRow <- c(classes[i,1],classes[i,2],learningObjectives[j,2],learningObjectives[j,2],b)
     curriculumMap[nrow(curriculumMap)+1,] <- mapRow
   }
 }
+
+
+# for testing purposes only, to deploy, replace curriculumMapTest by curriculumMap
+
+
 
 
 
